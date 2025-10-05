@@ -110,16 +110,20 @@ const SubText = styled.p`
 
 // -------------------- Sidebar --------------------
 const SidebarCard = styled(Card)`
-  position: sticky;
-  top: -900px; /* was 24px before — now moves it a bit up */
+  position: fixed;
+  top: 100px; /* distance from top edge of screen */
+  right: 40px; /* adjust if needed depending on layout */
+  width: 300px;
   height: fit-content;
   text-align: center;
-  transform: translateY(-190px); /* adds an extra upward nudge */
+  z-index: 1000; /* ensures it stays on top of all sections */
 
   @media (max-width: 899px) {
     display: none;
   }
 `;
+
+
 
 // For mobile version
 const MobileProfile = styled(Card)`
