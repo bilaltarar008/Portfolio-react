@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled, { createGlobalStyle } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Mail, FileDown } from "lucide-react";
+import { MessageCircle, Mail, FileDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 /*
   Professional CV/Resume Portfolio using React, Styled-Components & Framer Motion
@@ -151,22 +151,47 @@ const ProjectGrid = styled.div`
   gap: 20px;
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+`;
+
 const ProjectImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
+`;
+
+const ArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 36, 0.6);
+  border: none;
+  color: white;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
   &:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: rgba(96, 165, 250, 0.7);
   }
+`;
+
+const LeftArrow = styled(ArrowButton)`
+  left: 8px;
+`;
+
+const RightArrow = styled(ArrowButton)`
+  right: 8px;
 `;
 
 const ProjectTitle = styled.h3`
   font-size: 18px;
-  margin-top: 4px;
+  margin-top: 8px;
 `;
 
 const ProjectDesc = styled.p`
@@ -205,41 +230,41 @@ const projectData = [
     id: 1,
     title: "Bus Reservation System",
     description:
-      "A full-featured bus booking system built with React, Next.js, and Supabase. It allows users to reserve, update, and cancel tickets in real-time.",
+      "A full-featured bus booking system built with React, Next.js, and Supabase.",
     technologies: ["React", "Next.js", "Supabase"],
-    imageUrl: "/images/bus.PNG",
+    images: ["/images/bus.PNG", "/images/bus1.PNG", "/images/bus3.PNG"],
   },
   {
     id: 2,
     title: "LUMS App Development",
     description:
-      "Developed a full-stack mobile app with Flutter and Firebase, integrating backend APIs, real-time updates, and smooth UI animations.",
+      "Full-stack mobile app with Flutter and Firebase integration.",
     technologies: ["Flutter", "Dart", "Firebase"],
-    imageUrl: "/images/lums.jpeg",
+    images: ["/images/lums.jpeg", "/images/lums2.jpeg"],
   },
   {
     id: 3,
     title: "Business Portfolio (Kidmall.pk)",
     description:
-      "Created a business portfolio site with WordPress, MySQL, and Elementor, designed for scalability and brand presentation.",
+      "WordPress business site using MySQL and Elementor.",
     technologies: ["WordPress", "MySQL", "PHP"],
-    imageUrl: "/images/kid.PNG",
+    images: ["/images/kid.PNG", "/images/kid1.PNG", "/images/kid2.PNG"],
   },
   {
     id: 4,
     title: "EV Charging App UI",
     description:
-      "Designed and implemented a modern EV Charging app interface using Flutter, with Google Maps integration and booking features.",
+      "EV Charging app UI using Flutter, Maps, and booking features.",
     technologies: ["Flutter", "Dart", "Firebase"],
-    imageUrl: "/images/kid1.PNG",
+    images: ["/images/ev1.png", "/images/ev2.png", "/images/ev3.png"],
   },
   {
     id: 5,
     title: "Personal Portfolio Redesign",
     description:
-      "A sleek portfolio redesign focusing on accessibility, speed, and cross-platform design consistency using React & Styled Components.",
+      "Portfolio redesign with accessibility and styled-components.",
     technologies: ["React", "Styled Components", "Framer Motion"],
-    imageUrl: "/images/kid2.PNG",
+    images: ["/images/portfolio1.png", "/images/portfolio2.png"],
   },
 ];
 
@@ -252,21 +277,50 @@ function AboutSection() {
         I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
         <strong>React.js</strong> and <strong>Flutter</strong>. I build fast,
         visually refined, and high-performing user experiences across web and
-        mobile. My focus is on clean code, accessibility, and seamless
-        performance.
+        mobile.
       </SubText>
     </Card>
   );
 }
 
 function ProjectCard({ project }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) =>
+      prev === project.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+  };
+
   return (
     <Card
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <ProjectImage src={project.imageUrl} alt={project.title} loading="lazy" />
+      <ImageWrapper>
+        <ProjectImage
+          src={project.images[currentIndex]}
+          alt={project.title}
+          loading="lazy"
+        />
+        {project.images.length > 1 && (
+          <>
+            <LeftArrow onClick={handlePrev}>
+              <ArrowLeft size={18} />
+            </LeftArrow>
+            <RightArrow onClick={handleNext}>
+              <ArrowRight size={18} />
+            </RightArrow>
+          </>
+        )}
+      </ImageWrapper>
       <ProjectTitle>{project.title}</ProjectTitle>
       <ProjectDesc>{project.description}</ProjectDesc>
       <TechList>
@@ -335,19 +389,16 @@ export default function App() {
     <>
       <GlobalStyle />
       <Container>
-        {/* Header */}
         <HeaderWrap>
           <Name>Bilal Arshad</Name>
           <Title>Front-End & Mobile Developer</Title>
           <SubText>
             I’m a developer specializing in <strong>React</strong> and{" "}
             <strong>Flutter</strong>, crafting fast, accessible, and visually
-            refined interfaces with clean, maintainable code and exceptional
-            user experience.
+            refined interfaces.
           </SubText>
         </HeaderWrap>
 
-        {/* Mobile Profile Section */}
         <MobileProfile>
           <Avatar src="/images/profile.png" alt="Bilal Arshad" />
           <h3 style={{ fontWeight: 700, marginTop: 8 }}>Bilal Arshad</h3>
@@ -364,8 +415,7 @@ export default function App() {
             <Card id="contact" style={{ marginTop: 24 }}>
               <h2>Contact</h2>
               <SubText style={{ marginTop: 10 }}>
-                Open for collaborations and freelance opportunities. Let’s build
-                something amazing together.
+                Open for collaborations and freelance opportunities.
               </SubText>
               <ContactButtons style={{ marginTop: 16 }}>
                 <GhostButton href="mailto:Bilal.tarar008@gmail.com">
