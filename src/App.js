@@ -321,15 +321,30 @@ const projectData = [
 function AboutSection() {
   return (
     <Card id="about">
-      <h2 style={{ marginBottom: 10, color: "#111" }}>About Me</h2>
-      <SubText>
+      <h2 style={{ marginBottom: 16 }}>About Me</h2>
+      <SubText style={{ lineHeight: "1.8", fontSize: "15px" }}>
         I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
-        <strong>React.js</strong> and <strong>Flutter</strong>. I build fast,
-        elegant, and accessible user interfaces that feel delightful to use.
+        <strong>React.js</strong>, <strong>Flutter</strong>, and{" "}
+        <strong>WordPress</strong>. I build fast, elegant, and accessible user
+        interfaces that deliver seamless user experiences.
+        <br />
+        <br />
+        With a deep understanding of both{" "}
+        <strong>design principles</strong> and{" "}
+        <strong>modern web technologies</strong>, I focus on crafting visually
+        appealing, high-performance applications that scale efficiently.
+        <br />
+        <br />
+        I’m passionate about <strong>building clean, reusable code</strong>,
+        optimizing performance, and bringing creative ideas to life through
+        innovative solutions. Whether it’s developing a mobile app, a business
+        website, or a full-stack web platform — I aim to create digital
+        experiences that truly stand out.
       </SubText>
     </Card>
   );
 }
+
 
 function ProjectCard({ project }) {
   const [index, setIndex] = useState(0);
@@ -411,9 +426,7 @@ export default function App() {
           <Name>Bilal Arshad</Name>
           <Title>Front-End & Flutter Developer</Title>
           <SubText>
-            I specialize in <strong>React</strong> and <strong>Flutter</strong>,
-            crafting clean, responsive, and high-performance digital experiences
-            with an eye for design and usability.
+            I specialize in <strong>React</strong>, <strong>Flutter</strong>, and <strong>WordPress</strong> development, creating responsive, visually refined, and high-performance digital products that balance design aesthetics with practical functionality.
           </SubText>
         </HeaderWrap>
 
