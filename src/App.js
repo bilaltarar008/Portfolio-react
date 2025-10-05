@@ -13,6 +13,21 @@ import { MessageCircle, Mail, FileDown, ArrowLeft, ArrowRight } from "lucide-rea
 
 // -------------------- Global Styles --------------------
 const GlobalStyle = createGlobalStyle`
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #root {
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
   :root {
     --bg: #0f1724;
     --card: #0b1220;
@@ -36,10 +51,14 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   max-width: 1100px;
   margin: 40px auto;
-  padding: 28px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
 `;
 
 const Grid = styled.div`
@@ -398,14 +417,90 @@ export default function App() {
             refined interfaces.
           </SubText>
         </HeaderWrap>
+<MobileProfile>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+      padding: "24px 16px",
+      margin: "0 auto",
+      width: "100%",
+      boxSizing: "border-box",
+    }}
+  >
+    <Avatar
+      src="/images/profile.png"
+      alt="Bilal Arshad"
+      style={{
+        width: "110px",
+        height: "110px",
+        borderRadius: "50%",
+        objectFit: "cover",
+        border: "2px solid var(--accent)",
+        marginBottom: "12px",
+      }}
+    />
 
-        <MobileProfile>
-          <Avatar src="/images/profile.png" alt="Bilal Arshad" />
-          <h3 style={{ fontWeight: 700, marginTop: 8 }}>Bilal Arshad</h3>
-          <p style={{ color: "var(--muted)", fontSize: 13 }}>
-            React & Flutter Developer
-          </p>
-        </MobileProfile>
+    <h3
+      style={{
+        fontWeight: 700,
+        marginTop: "4px",
+        fontSize: "1.25rem",
+      }}
+    >
+      Bilal Arshad
+    </h3>
+
+    <p
+      style={{
+        color: "var(--muted)",
+        fontSize: "14px",
+        marginTop: "4px",
+      }}
+    >
+      React & Flutter Developer
+    </p>
+
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "320px",
+        marginTop: "18px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+      }}
+    >
+      <GhostButton
+        href="mailto:Bilal.tarar008@gmail.com"
+        style={{ width: "100%" }}
+      >
+        <Mail size={15} style={{ marginRight: "6px" }} /> Email
+      </GhostButton>
+
+      <GhostButton
+        href="/Bilalcv.pdf"
+        download="Bilal_Arshad_CV.pdf"
+        style={{ width: "100%" }}
+      >
+        <FileDown size={15} style={{ marginRight: "6px" }} /> Download CV
+      </GhostButton>
+
+      <GhostButton
+        href="https://wa.me/923194098688"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ width: "100%" }}
+      >
+        <MessageCircle size={15} style={{ marginRight: "6px" }} /> WhatsApp
+      </GhostButton>
+    </div>
+  </div>
+</MobileProfile>
+
+
 
         <Grid>
           <div>
