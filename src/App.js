@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Mail, FileDown, ArrowLeft, ArrowRight } from "lucide-react";
-
-/*
-  Professional CV/Resume Portfolio using React, Styled-Components & Framer Motion
-  ------------------------------------------------------------------
-  Dependencies:
-  npm install styled-components framer-motion prop-types lucide-react
-*/
 
 // -------------------- Global Styles --------------------
 const GlobalStyle = createGlobalStyle`
@@ -18,8 +11,21 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
 
-  #root {
-    overflow-x: hidden;
+  :root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --muted: #666;
+    --accent: #e63946;
+    --glass: rgba(230, 57, 70, 0.08);
+    --radius: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+  }
+
+  body {
+    background: var(--bg);
+    color: #222;
+    -webkit-font-smoothing: antialiased;
   }
 
   img {
@@ -27,34 +33,23 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
     display: block;
   }
+`;
 
-  :root {
-    --bg: #0f1724;
-    --card: #0b1220;
-    --muted: #94a3b8;
-    --accent: #60a5fa;
-    --glass: rgba(255,255,255,0.04);
-    --radius: 16px;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body, #root { height: 100%; scroll-behavior: smooth; }
-  body {
-    background: linear-gradient(180deg, var(--bg), #08101e 120%);
-    color: #e6eef8;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
+// -------------------- Animations --------------------
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
 // -------------------- Layout Components --------------------
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  animation: ${fadeIn} 1.2s ease-in-out;
 
   @media (max-width: 480px) {
     padding: 16px;
@@ -74,9 +69,14 @@ const Grid = styled.div`
 const Card = styled(motion.section)`
   background: var(--card);
   border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 28px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
 `;
 
 // -------------------- Header --------------------
@@ -92,18 +92,18 @@ const HeaderWrap = styled.header`
 `;
 
 const Name = styled.h1`
-  font-size: 28px;
+  font-size: 2.3rem;
   font-weight: 700;
 `;
 
 const Title = styled.h2`
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
   color: var(--accent);
 `;
 
 const SubText = styled.p`
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   max-width: 600px;
 `;
@@ -111,30 +111,46 @@ const SubText = styled.p`
 // -------------------- Sidebar --------------------
 const SidebarCard = styled(Card)`
   position: sticky;
-  top: 24px;
+  top: -900px; /* was 24px before — now moves it a bit up */
   height: fit-content;
+  text-align: center;
+  transform: translateY(-190px); /* adds an extra upward nudge */
 
   @media (max-width: 899px) {
     display: none;
   }
 `;
 
-const MobileProfile = styled.div`
-  display: none;
+// For mobile version
+const MobileProfile = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  @media (max-width: 899px) {
-    display: block;
-    margin-top: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+  @media (min-width: 900px) {
+    display: none;
   }
 `;
 
 const Avatar = styled.img`
-  width: 96px;
-  height: 96px;
-  border-radius: 14px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--accent);
+  border: 3px solid var(--accent);
   margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.2);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const ContactButtons = styled.div`
@@ -145,22 +161,33 @@ const ContactButtons = styled.div`
 `;
 
 const GhostButton = styled.a`
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--muted);
+  font-weight: 600;
+  border: 2px solid transparent;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.02);
-  transition: all 0.2s ease;
-  &:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: rgba(96, 165, 250, 0.08);
-  }
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  ${({ variant }) =>
+    variant === "primary"
+      ? `
+        background-color: var(--accent);
+        color: white;
+        box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        &:hover { background-color: #d62839; }
+      `
+      : `
+        background-color: white;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+        &:hover { background-color: var(--accent); color: white; }
+      `}
 `;
 
 // -------------------- Projects --------------------
@@ -178,17 +205,21 @@ const ImageWrapper = styled.div`
 
 const ProjectImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 230px;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.04);
+  }
 `;
 
 const ArrowButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(15, 23, 36, 0.6);
+  background: rgba(107, 107, 107, 0.7);
   border: none;
   color: white;
   padding: 6px;
@@ -196,17 +227,12 @@ const ArrowButton = styled.button`
   cursor: pointer;
   transition: 0.2s;
   &:hover {
-    background: rgba(96, 165, 250, 0.7);
+    background: rgba(230, 57, 70, 0.9);
   }
 `;
 
-const LeftArrow = styled(ArrowButton)`
-  left: 8px;
-`;
-
-const RightArrow = styled(ArrowButton)`
-  right: 8px;
-`;
+const LeftArrow = styled(ArrowButton)`left: 8px;`;
+const RightArrow = styled(ArrowButton)`right: 8px;`;
 
 const ProjectTitle = styled.h3`
   font-size: 18px;
@@ -239,11 +265,11 @@ const Tech = styled.span`
 const FooterWrap = styled.footer`
   text-align: center;
   font-size: 13px;
-  color: var(--muted);
+  color: #999;
   margin-top: 36px;
 `;
 
-// -------------------- Project Data --------------------
+// -------------------- Data --------------------
 const projectData = [
   {
     id: 1,
@@ -256,16 +282,14 @@ const projectData = [
   {
     id: 2,
     title: "LUMS App Development",
-    description:
-      "Full-stack mobile app with Flutter and Firebase integration.",
+    description: "Full-stack mobile app with Flutter and Firebase integration.",
     technologies: ["Flutter", "Dart", "Firebase"],
     images: ["/images/lums.jpeg", "/images/lums2.jpeg"],
   },
   {
     id: 3,
     title: "Business Portfolio (Kidmall.pk)",
-    description:
-      "WordPress business site using MySQL and Elementor.",
+    description: "WordPress business site using MySQL and Elementor.",
     technologies: ["WordPress", "MySQL", "PHP"],
     images: ["/images/kid.PNG", "/images/kid1.PNG", "/images/kid2.PNG"],
   },
@@ -280,61 +304,45 @@ const projectData = [
   {
     id: 5,
     title: "Personal Portfolio Redesign",
-    description:
-      "Portfolio redesign with accessibility and styled-components.",
+    description: "Portfolio redesign with accessibility and styled-components.",
     technologies: ["React", "Styled Components", "Framer Motion"],
     images: ["/images/portfolio1.png", "/images/portfolio2.png"],
   },
 ];
 
 // -------------------- Components --------------------
+
+
+
 function AboutSection() {
   return (
     <Card id="about">
-      <h2 style={{ marginBottom: 10 }}>About Me</h2>
+      <h2 style={{ marginBottom: 10, color: "#111" }}>About Me</h2>
       <SubText>
         I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
         <strong>React.js</strong> and <strong>Flutter</strong>. I build fast,
-        visually refined, and high-performing user experiences across web and
-        mobile.
+        elegant, and accessible user interfaces that feel delightful to use.
       </SubText>
     </Card>
   );
 }
 
 function ProjectCard({ project }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) =>
-      prev === project.images.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
-    );
-  };
+  const [index, setIndex] = useState(0);
+  const next = () => setIndex((i) => (i + 1) % project.images.length);
+  const prev = () =>
+    setIndex((i) => (i === 0 ? project.images.length - 1 : i - 1));
 
   return (
-    <Card
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
+    <Card>
       <ImageWrapper>
-        <ProjectImage
-          src={project.images[currentIndex]}
-          alt={project.title}
-          loading="lazy"
-        />
+        <ProjectImage src={project.images[index]} alt={project.title} />
         {project.images.length > 1 && (
           <>
-            <LeftArrow onClick={handlePrev}>
+            <LeftArrow onClick={prev}>
               <ArrowLeft size={18} />
             </LeftArrow>
-            <RightArrow onClick={handleNext}>
+            <RightArrow onClick={next}>
               <ArrowRight size={18} />
             </RightArrow>
           </>
@@ -352,42 +360,29 @@ function ProjectCard({ project }) {
 }
 ProjectCard.propTypes = { project: PropTypes.object.isRequired };
 
-function ProjectsSection({ projects }) {
-  return (
-    <section id="projects">
-      <h2 style={{ marginBottom: 12 }}>Projects</h2>
-      <ProjectGrid>
-        <AnimatePresence>
-          {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} />
-          ))}
-        </AnimatePresence>
-      </ProjectGrid>
-    </section>
-  );
-}
-ProjectsSection.propTypes = { projects: PropTypes.array.isRequired };
-
 function Sidebar() {
   return (
     <SidebarCard>
       <Avatar src="/images/profile.png" alt="Bilal Arshad" />
       <h3 style={{ fontWeight: 700 }}>Bilal Arshad</h3>
-      <p style={{ color: "var(--muted)", fontSize: 13 }}>
-        React & Flutter Developer
-      </p>
+      <p style={{ color: "#888", fontSize: 13 }}>React & Flutter Developer</p>
 
       <ContactButtons>
-        <GhostButton href="mailto:Bilal.tarar008@gmail.com">
+        <GhostButton href="mailto:Bilal.tarar008@gmail.com" variant="secondary">
           <Mail size={16} /> Email
         </GhostButton>
-        <GhostButton href="/Bilalcv.pdf" download="Bilal_Arshad_CV.pdf">
+        <GhostButton
+          href="/Bilalcv.pdf"
+          download="Bilal_Arshad_CV.pdf"
+          variant="primary"
+        >
           <FileDown size={16} /> Download CV
         </GhostButton>
         <GhostButton
           href="https://wa.me/923194098688"
           target="_blank"
           rel="noopener noreferrer"
+          variant="secondary"
         >
           <MessageCircle size={16} /> WhatsApp
         </GhostButton>
@@ -410,132 +405,86 @@ export default function App() {
       <Container>
         <HeaderWrap>
           <Name>Bilal Arshad</Name>
-          <Title>Front-End & Mobile Developer</Title>
+          <Title>Front-End & Flutter Developer</Title>
           <SubText>
-            I’m a developer specializing in <strong>React</strong> and{" "}
-            <strong>Flutter</strong>, crafting fast, accessible, and visually
-            refined interfaces.
+            I specialize in <strong>React</strong> and <strong>Flutter</strong>,
+            crafting clean, responsive, and high-performance digital experiences
+            with an eye for design and usability.
           </SubText>
         </HeaderWrap>
-<MobileProfile>
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      textAlign: "center",
-      padding: "24px 16px",
-      margin: "0 auto",
-      width: "100%",
-      boxSizing: "border-box",
-    }}
-  >
-    <Avatar
-      src="/images/profile.png"
-      alt="Bilal Arshad"
-      style={{
-        width: "110px",
-        height: "110px",
-        borderRadius: "50%",
-        objectFit: "cover",
-        border: "2px solid var(--accent)",
-        marginBottom: "12px",
-      }}
-    />
-
-    <h3
-      style={{
-        fontWeight: 700,
-        marginTop: "4px",
-        fontSize: "1.25rem",
-      }}
-    >
-      Bilal Arshad
-    </h3>
-
-    <p
-      style={{
-        color: "var(--muted)",
-        fontSize: "14px",
-        marginTop: "4px",
-      }}
-    >
-      React & Flutter Developer
-    </p>
-
-    <div
-      style={{
-        width: "100%",
-        maxWidth: "320px",
-        marginTop: "18px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
-      }}
-    >
-      <GhostButton
-        href="mailto:Bilal.tarar008@gmail.com"
-        style={{ width: "100%" }}
-      >
-        <Mail size={15} style={{ marginRight: "6px" }} /> Email
-      </GhostButton>
-
-      <GhostButton
-        href="/Bilalcv.pdf"
-        download="Bilal_Arshad_CV.pdf"
-        style={{ width: "100%" }}
-      >
-        <FileDown size={15} style={{ marginRight: "6px" }} /> Download CV
-      </GhostButton>
-
-      <GhostButton
-        href="https://wa.me/923194098688"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{ width: "100%" }}
-      >
-        <MessageCircle size={15} style={{ marginRight: "6px" }} /> WhatsApp
-      </GhostButton>
-    </div>
-  </div>
-</MobileProfile>
-
-
 
         <Grid>
           <div>
+            <MobileProfile>
+  <Avatar src="/images/profile.png" alt="Bilal Arshad" />
+  <h3 style={{ fontWeight: 700, marginTop: 8 }}>Bilal Arshad</h3>
+  <p style={{ color: "var(--muted)", fontSize: 13 }}>
+    React & Flutter Developer
+  </p>
+  <ContactButtons style={{ width: "100%", marginTop: 10 }}>
+    <GhostButton
+      href="mailto:Bilal.tarar008@gmail.com"
+      style={{
+        width: "90%",
+        borderColor: "#f43f5e",
+        color: "#f43f5e",
+      }}
+    >
+      <Mail size={15} style={{ marginRight: "6px" }} /> Email
+    </GhostButton>
+
+    <GhostButton
+      href="/Bilalcv.pdf"
+      download="Bilal_Arshad_CV.pdf"
+      style={{
+        width: "90%",
+        backgroundColor: "#f43f5e",
+        color: "white",
+        boxShadow: "0 4px 10px rgba(244,63,94,0.3)",
+      }}
+    >
+      <FileDown size={15} style={{ marginRight: "6px" }} /> Download CV
+    </GhostButton>
+
+    <GhostButton
+      href="https://wa.me/923194098688"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        width: "90%",
+        borderColor: "#f43f5e",
+        color: "#f43f5e",
+      }}
+    >
+      <MessageCircle size={15} style={{ marginRight: "6px" }} /> WhatsApp
+    </GhostButton>
+  </ContactButtons>
+</MobileProfile>
+
             <AboutSection />
             <ProjectsSection projects={projects} />
-
-            <Card id="contact" style={{ marginTop: 24 }}>
-              <h2>Contact</h2>
-              <SubText style={{ marginTop: 10 }}>
-                Open for collaborations and freelance opportunities.
-              </SubText>
-              <ContactButtons style={{ marginTop: 16 }}>
-                <GhostButton href="mailto:Bilal.tarar008@gmail.com">
-                  <Mail size={16} /> Say Hello
-                </GhostButton>
-                <GhostButton
-                  href="https://wa.me/923194098688"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle size={16} /> WhatsApp Me
-                </GhostButton>
-              </ContactButtons>
-            </Card>
           </div>
-
-          <div>
-            <Sidebar />
-          </div>
+          <Sidebar />
         </Grid>
 
-        <FooterWrap>
-          © {new Date().getFullYear()} Bilal Arshad — Built with React.js
-        </FooterWrap>
+        <FooterWrap>© {new Date().getFullYear()} Bilal Arshad — Built with ❤️</FooterWrap>
       </Container>
     </>
   );
 }
+
+function ProjectsSection({ projects }) {
+  return (
+    <section id="projects">
+      <h2 style={{ marginBottom: 12 }}>Projects</h2>
+      <ProjectGrid>
+        <AnimatePresence>
+          {projects.map((p) => (
+            <ProjectCard key={p.id} project={p} />
+          ))}
+        </AnimatePresence>
+      </ProjectGrid>
+    </section>
+  );
+}
+ProjectsSection.propTypes = { projects: PropTypes.array.isRequired };
