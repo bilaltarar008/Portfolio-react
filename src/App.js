@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --bg: #fafafa;
     --card: #ffffff;
     --muted: #666;
-    --accent: #e63946;
+    --accent: #3945e6ff;
     --glass: rgba(230, 57, 70, 0.08);
     --radius: 16px;
     font-family: 'Poppins', sans-serif;
@@ -149,7 +149,7 @@ const Avatar = styled.img`
   object-fit: cover;
   border: 3px solid var(--accent);
   margin-bottom: 12px;
-  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.2);
+  box-shadow: 0 4px 15px rgba(74, 57, 230, 0.2);
   transition: transform 0.3s ease;
 
   &:hover {
