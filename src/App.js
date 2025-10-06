@@ -303,7 +303,7 @@ const projectData = [
     description:
       "EV Charging app UI using Flutter, Maps, and booking features.",
     technologies: ["Flutter", "Dart", "Firebase"],
-    images: ["/images/ev1.png", "/images/ev2.png", "/images/ev3.png"],
+    images: ["/images/mobile.PNG", "/images/mobile1.PNG", "/images/mobile2.PNG","/images/mobile3.PNG",],
   },
   {
     id: 5,
@@ -315,8 +315,6 @@ const projectData = [
 ];
 
 // -------------------- Components --------------------
-
-
 
 function AboutSection() {
   return (
@@ -348,36 +346,135 @@ function AboutSection() {
 
 function ProjectCard({ project }) {
   const [index, setIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
   const next = () => setIndex((i) => (i + 1) % project.images.length);
   const prev = () =>
     setIndex((i) => (i === 0 ? project.images.length - 1 : i - 1));
 
   return (
-    <Card>
-      <ImageWrapper>
-        <ProjectImage src={project.images[index]} alt={project.title} />
-        {project.images.length > 1 && (
-          <>
-            <LeftArrow onClick={prev}>
-              <ArrowLeft size={18} />
-            </LeftArrow>
-            <RightArrow onClick={next}>
-              <ArrowRight size={18} />
-            </RightArrow>
-          </>
-        )}
-      </ImageWrapper>
-      <ProjectTitle>{project.title}</ProjectTitle>
-      <ProjectDesc>{project.description}</ProjectDesc>
-      <TechList>
-        {project.technologies.map((t) => (
-          <Tech key={t}>{t}</Tech>
-        ))}
-      </TechList>
-    </Card>
+    <>
+      <Card>
+        <ImageWrapper>
+          <ProjectImage
+            src={project.images[index]}
+            alt={project.title}
+            onClick={() => setIsOpen(true)} // 👈 Open modal on click
+            style={{ cursor: "pointer" }}
+          />
+          {project.images.length > 1 && (
+            <>
+              <LeftArrow onClick={prev}>
+                <ArrowLeft size={18} />
+              </LeftArrow>
+              <RightArrow onClick={next}>
+                <ArrowRight size={18} />
+              </RightArrow>
+            </>
+          )}
+        </ImageWrapper>
+        <ProjectTitle>{project.title}</ProjectTitle>
+        <ProjectDesc>{project.description}</ProjectDesc>
+        <TechList>
+          {project.technologies.map((t) => (
+            <Tech key={t}>{t}</Tech>
+          ))}
+        </TechList>
+      </Card>
+
+      {isOpen && (
+        <ImageModal
+          images={project.images}
+          currentIndex={index}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
+    </>
   );
 }
-ProjectCard.propTypes = { project: PropTypes.object.isRequired };
+
+
+// -------------------- Image Modal --------------------
+function ImageModal({ images, currentIndex, onClose }) {
+  const [index, setIndex] = useState(currentIndex);
+
+  const next = () => setIndex((i) => (i + 1) % images.length);
+  const prev = () => setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          background: "rgba(0,0,0,0.85)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 2000,
+        }}
+        onClick={onClose}
+      >
+        <motion.img
+          key={index}
+          src={images[index]}
+          alt="Full view"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            maxWidth: "90%",
+            maxHeight: "85%",
+            borderRadius: "12px",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
+            objectFit: "contain",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        />
+        {images.length > 1 && (
+          <>
+            <ArrowButton
+              style={{ left: "20px", background: "rgba(255,255,255,0.15)" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+            >
+              <ArrowLeft size={24} />
+            </ArrowButton>
+            <ArrowButton
+              style={{ right: "20px", background: "rgba(255,255,255,0.15)" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+            >
+              <ArrowRight size={24} />
+            </ArrowButton>
+          </>
+        )}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 
 function Sidebar() {
   return (
