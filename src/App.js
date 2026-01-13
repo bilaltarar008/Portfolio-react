@@ -317,6 +317,18 @@ const projectData = [
     { type: "image", src: "/images/kidsquiz2.jpeg" },
   ]
   },
+
+  {
+    id: 6,
+    title: "United Energy (unitedenergy.pk)",
+    description: "United Energy is a renewable energy company specializing in solar solutions for residential, commercial, and industrial needs.",
+    technologies: ["React", "CSS", "SupaBase"],
+    media: [
+    { type: "image", src: "/images/Ue1.PNG" },
+    { type: "image", src: "/images/Ue2.PNG" },
+    { type: "image", src: "/images/Ue3.PNG" },
+  ]
+  },
 ];
 
 // -------------------- Components --------------------
