@@ -335,28 +335,28 @@ const projectData = [
 
 function AboutSection() {
   return (
-    <Card id="about">
-      <h2 style={{ marginBottom: 16 }}>About Me</h2>
-      <SubText style={{ lineHeight: "1.8", fontSize: "15px" }}>
-        I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
-        <strong>React.js</strong>, <strong>Flutter</strong>, and{" "}
-        <strong>WordPress</strong>. I build fast, elegant, and accessible user
-        interfaces that deliver seamless user experiences.
-        <br />
-        <br />
-        With a deep understanding of both{" "}
-        <strong>design principles</strong> and{" "}
-        <strong>modern web technologies</strong>, I focus on crafting visually
-        appealing, high-performance applications that scale efficiently.
-        <br />
-        <br />
-        I’m passionate about <strong>building clean, reusable code</strong>,
-        optimizing performance, and bringing creative ideas to life through
-        innovative solutions. Whether it’s developing a mobile app, a business
-        website, or a full-stack web platform — I aim to create digital
-        experiences that truly stand out.
-      </SubText>
-    </Card>
+      <Card id="about">
+        <h2 style={{ marginBottom: 16 }}>About Me</h2>
+        <SubText style={{ lineHeight: "1.8", fontSize: "15px" }}>
+          I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
+          <strong>React.js</strong>, <strong>Flutter</strong>, and{" "}
+          <strong>WordPress</strong>. I build fast, elegant, and accessible user
+          interfaces that deliver seamless user experiences.
+          <br />
+          <br />
+          With a deep understanding of both{" "}
+          <strong>design principles</strong> and{" "}
+          <strong>modern web technologies</strong>, I focus on crafting visually
+          appealing, high-performance applications that scale efficiently.
+          <br />
+          <br />
+          I’m passionate about <strong>building clean, reusable code</strong>,
+          optimizing performance, and bringing creative ideas to life through
+          innovative solutions. Whether it’s developing a mobile app, a business
+          website, or a full-stack web platform — I aim to create digital
+          experiences that truly stand out.
+        </SubText>
+      </Card>
   );
 }
 
