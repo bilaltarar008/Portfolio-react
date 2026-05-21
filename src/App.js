@@ -44,8 +44,8 @@ const fadeIn = keyframes`
 // -------------------- Layout Components --------------------
 const Container = styled.div`
   max-width: 1300px;
-  margin: 40px auto;
-  padding: 40px;
+  margin: 20px auto;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -195,6 +195,969 @@ const GhostButton = styled.a`
 `;
 
 // -------------------- Projects --------------------
+
+// -------------------- Featured Showcase Sections --------------------
+
+const ShowcaseSection = styled(Card)`
+  padding: 0;
+  overflow: hidden;
+  background: ${({ dark }) =>
+    dark
+      ? "linear-gradient(135deg, #0f172a, #111827)"
+      : "linear-gradient(135deg, #ffffff, #f8fafc)"};
+
+  color: ${({ dark }) => (dark ? "white" : "#111827")};
+
+  border: ${({ dark }) =>
+    dark
+      ? "1px solid rgba(255,255,255,0.08)"
+      : "1px solid rgba(0,0,0,0.05)"};
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+`;
+
+const ShowcaseGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ShowcaseContent = styled.div`
+  padding: 34px;
+
+  @media (max-width: 768px) {
+    padding: 24px;
+  }
+`;
+
+const ShowcaseBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  background: ${({ dark }) =>
+    dark
+      ? "rgba(255,255,255,0.08)"
+      : "rgba(79,70,229,0.08)"};
+
+  color: ${({ dark }) => (dark ? "#fff" : "#4f46e5")};
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  margin-bottom: 18px;
+`;
+
+const FeaturedProjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FeaturedCard = styled(Card)`
+  padding: 0;
+  overflow: hidden;
+
+  min-height: 460px;
+
+  display: grid;
+  grid-template-columns: 420px 1fr;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FeaturedProjectsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 22px;
+
+  align-items: stretch;
+
+  margin-bottom: 34px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FeaturedLeft = styled.div`
+  padding: 34px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    padding: 24px;
+  }
+`;
+
+const FeaturedRight = styled.div`
+  position: relative;
+
+  background: #eef2ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  overflow: hidden;
+`;
+
+const GalleryImage = styled.img`
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 18px;
+
+  transition: 0.4s ease;
+
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
+
+const MobileFrame = styled.div`
+  width: 260px;
+  height: 520px;
+
+  border-radius: 38px;
+  overflow: hidden;
+
+  background: black;
+  padding: 10px;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.25);
+
+  @media (max-width: 768px) {
+    width: 220px;
+    height: 430px;
+  }
+`;
+
+const MobileImage = styled.img`
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+`;
+
+const GalleryArrow = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0,0,0,0.55);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    background: #4f46e5;
+  }
+`;
+
+const GalleryLeft = styled(GalleryArrow)`
+  left: 14px;
+`;
+
+const GalleryRight = styled(GalleryArrow)`
+  right: 14px;
+`;
+
+const ShowcaseTitle = styled.h2`
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 14px;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+`;
+
+const ShowcaseDesc = styled.p`
+  line-height: 1.9;
+  font-size: 15px;
+
+  color: ${({ dark }) =>
+    dark ? "rgba(255,255,255,0.75)" : "#4b5563"};
+`;
+
+const StackWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+`;
+
+const StackItem = styled.div`
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  background: ${({ dark }) =>
+    dark
+      ? "rgba(255,255,255,0.08)"
+      : "rgba(79,70,229,0.08)"};
+
+  color: ${({ dark }) => (dark ? "#fff" : "#4338ca")};
+
+  font-size: 12px;
+  font-weight: 500;
+`;
+
+const MetricsRow = styled.div`
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+`;
+
+
+const MetricCard = styled.div`
+  min-width: 110px;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  background: ${({ dark }) =>
+    dark
+      ? "rgba(255,255,255,0.05)"
+      : "rgba(255,255,255,0.8)"};
+`;
+
+const MetricValue = styled.div`
+  font-size: 1rem;
+  font-weight: 700;
+`;
+
+const MetricLabel = styled.div`
+  font-size: 11px;
+  margin-top: 2px;
+  opacity: 0.7;
+`;
+
+const ShowcaseButtons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+`;
+
+const ShowcaseBtn = styled.a`
+  padding: 13px 20px;
+  border-radius: 12px;
+
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+
+  ${({ primary, dark }) =>
+    primary
+      ? `
+        background: ${dark ? "#22c55e" : "#4f46e5"};
+        color: white;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+      `
+      : `
+        border: 1px solid ${
+          dark
+            ? "rgba(255,255,255,0.15)"
+            : "rgba(79,70,229,0.2)"
+        };
+
+        color: ${dark ? "#fff" : "#4f46e5"};
+
+        &:hover {
+          background: ${
+            dark
+              ? "rgba(255,255,255,0.06)"
+              : "rgba(79,70,229,0.05)"
+          };
+        }
+      `}
+`;
+
+const ShowcaseImageWrap = styled.div`
+  height: 100%;
+  min-height: 320px;
+  position: relative;
+
+  @media (max-width: 900px) {
+    min-height: 220px;
+  }
+`;
+
+const ShowcaseImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+// -------------------- Sooraj Crop Science --------------------
+
+function FeaturedProjectsSection() {
+
+  const soorajImages = [
+    "/images/sooraj.png",
+    "/images/sooraj1.png",
+    "/images/sooraj2.png",
+    "/images/sooraj3.png",
+    "/images/sooraj4.png",
+    "/images/sooraj5.png",
+
+  ];
+
+  const meatImages = [
+    "/images/meatapp.png",
+    "/images/meatapp1.png",
+    "/images/meatapp2.png",
+    "/images/meatapp3.png",
+    "/images/meatapp4.png",
+  ];
+
+  const [soorajIndex, setSoorajIndex] = useState(0);
+  const [meatIndex, setMeatIndex] = useState(0);
+
+  const [fullscreen, setFullscreen] =
+    useState(null);
+
+  // AUTO SLIDE
+
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+
+      setSoorajIndex((prev) =>
+        (prev + 1) % soorajImages.length
+      );
+
+      setMeatIndex((prev) =>
+        (prev + 1) % meatImages.length
+      );
+
+    }, 3000);
+
+    return () => clearInterval(interval);
+
+  }, []);
+
+  return (
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns:
+        "repeat(auto-fit,minmax(420px,1fr))",
+      gap: "18px",
+      alignItems: "start",
+      marginBottom: "20px",
+    }}
+  >
+
+    {/* ================= SOORAJ ================= */}
+
+    <Card
+      style={{
+        overflow: "hidden",
+        borderRadius: "24px",
+        background:
+          "linear-gradient(135deg,#07122b,#0f172a)",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+
+      <div style={{ padding: "0.5px" }}>
+
+        {/* TOP */}
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            flexWrap: "wrap",
+            marginBottom: "20px",
+          }}
+        >
+
+          <div
+            style={{
+              padding: "8px 16px",
+              borderRadius: "999px",
+              background: "rgba(255,255,255,0.08)",
+              fontSize: "11px",
+              fontWeight: "700",
+              letterSpacing: "2px",
+            }}
+          >
+            AGRICULTURE PLATFORM
+          </div>
+
+          <a
+            href="https://soorajcropsciences.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: "9px 16px",
+              borderRadius: "10px",
+              background: "#22c55e",
+              color: "white",
+              textDecoration: "none",
+              fontSize: "13px",
+              fontWeight: "600",
+            }}
+          >
+            Visit Website
+          </a>
+
+        </div>
+
+        {/* TITLE */}
+
+        <h2
+          style={{
+            fontSize: "2rem",
+            lineHeight: "1.1",
+            marginBottom: "16px",
+          }}
+        >
+          Sooraj Crop Science
+        </h2>
+
+        {/* DESC */}
+
+        <p
+          style={{
+            fontSize: "14px",
+            lineHeight: "1.8",
+            color: "rgba(255,255,255,0.78)",
+          }}
+        >
+          Enterprise agriculture management
+          platform for crop analysis,
+          fertilizer recommendations,
+          farmer management, and operational
+          workflows with scalable frontend
+          architecture.
+        </p>
+
+        {/* STACK */}
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "10px",
+            marginTop: "18px",
+          }}
+        >
+
+          {[
+            "React.js",
+            "Firebase",
+            "Node.js",
+            "AI Bot",
+            "Responsive Dashboard",
+            "Multilingual Websites",
+          ].map((item) => (
+
+            <div
+              key={item}
+              style={{
+                padding: "8px 12px",
+                borderRadius: "999px",
+                background:
+                  "rgba(255,255,255,0.08)",
+                fontSize: "12px",
+                fontWeight: "600",
+              }}
+            >
+              {item}
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+      {/* IMAGE */}
+
+      <div
+  style={{
+    position: "relative",
+    padding: "14px",
+  }}
+>
+
+  <div
+    style={{
+      height: "240px",
+      overflow: "hidden",
+      borderRadius: "20px",
+      background: "white",
+      position: "relative",
+    }}
+  >
+
+    <img
+      src={soorajImages[soorajIndex]}
+      alt="Sooraj"
+      onClick={() =>
+        setFullscreen({
+          images: soorajImages,
+          index: soorajIndex,
+        })
+      }
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        cursor: "pointer",
+      }}
+    />
+
+    {/* LEFT */}
+
+    <button
+      onClick={() =>
+        setSoorajIndex((prev) =>
+          prev === 0
+            ? soorajImages.length - 1
+            : prev - 1
+        )
+      }
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "14px",
+        transform: "translateY(-50%)",
+        width: "42px",
+        height: "42px",
+        borderRadius: "50%",
+        border: "none",
+        background: "rgba(0,0,0,0.55)",
+        color: "white",
+        cursor: "pointer",
+        fontSize: "18px",
+      }}
+    >
+      ←
+    </button>
+
+    {/* RIGHT */}
+
+    <button
+      onClick={() =>
+        setSoorajIndex((prev) =>
+          (prev + 1) %
+          soorajImages.length
+        )
+      }
+      style={{
+        position: "absolute",
+        top: "50%",
+        right: "14px",
+        transform: "translateY(-50%)",
+        width: "42px",
+        height: "42px",
+        borderRadius: "50%",
+        border: "none",
+        background: "rgba(0,0,0,0.55)",
+        color: "white",
+        cursor: "pointer",
+        fontSize: "18px",
+      }}
+    >
+      →
+    </button>
+
+  </div>
+
+</div>
+
+    </Card>
+
+    {/* ================= MEAT ================= */}
+
+    <Card
+      style={{
+        overflow: "hidden",
+        borderRadius: "24px",
+        background: "white",
+        padding: "0",
+      }}
+    >
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 220px",
+          alignItems: "center",
+          minHeight: "100%",
+        }}
+      >
+
+        {/* LEFT */}
+
+        <div
+          style={{
+            padding: "26px",
+          }}
+        >
+
+          {/* TOP */}
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              flexWrap: "wrap",
+              marginBottom: "18px",
+            }}
+          >
+
+            <div
+              style={{
+                padding: "8px 16px",
+                borderRadius: "999px",
+                background:
+                  "rgba(79,70,229,0.08)",
+                color: "#4f46e5",
+                fontSize: "11px",
+                fontWeight: "700",
+                letterSpacing: "2px",
+              }}
+            >
+              Mobile Application
+            </div>
+
+            <a
+              href="https://meat-exporter-app.web.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                padding: "9px 16px",
+                borderRadius: "10px",
+                background: "#4f46e5",
+                color: "white",
+                textDecoration: "none",
+                fontSize: "13px",
+                fontWeight: "600",
+              }}
+            >
+              Open Live App
+            </a>
+
+          </div>
+
+          {/* TITLE */}
+
+          <h2
+            style={{
+              fontSize: "2rem",
+              marginBottom: "14px",
+              color: "#111827",
+            }}
+          >
+            Meat Tracer
+          </h2>
+
+          {/* DESC */}
+
+          <p
+            style={{
+              fontSize: "14px",
+              lineHeight: "1.8",
+              color: "#6b7280",
+            }}
+          >
+            Livestock and shipment
+            traceability application for
+            slaughterhouse workflows,
+            operational tracking, owner
+            management, and monitoring.
+          </p>
+
+          {/* STACK */}
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px",
+              marginTop: "18px",
+            }}
+          >
+
+            {[
+              "Flutter",
+              "Firebase",
+              "Riverpod",
+              "Firebase Auth",
+              "Firestore Database",
+              "Responsive UI",
+              "Offline Sync",
+            ].map((item) => (
+
+              <div
+                key={item}
+                style={{
+                  padding: "8px 12px",
+                  borderRadius: "999px",
+                  background:
+                    "rgba(79,70,229,0.08)",
+                  color: "#4f46e5",
+                  fontSize: "12px",
+                  fontWeight: "600",
+                }}
+              >
+                {item}
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+        {/* RIGHT */}
+
+       {/* RIGHT */}
+
+<div
+  style={{
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "#f8fafc",
+    padding: "18px",
+    height: "100%",
+  }}
+>
+
+  <div
+    style={{
+      width: "170px",
+      height: "340px",
+      background: "black",
+      borderRadius: "34px",
+      padding: "8px",
+      overflow: "hidden",
+    }}
+  >
+
+    <img
+      src={meatImages[meatIndex]}
+      alt="Meat Tracer"
+      onClick={() =>
+        setFullscreen({
+          images: meatImages,
+          index: meatIndex,
+        })
+      }
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        borderRadius: "26px",
+        cursor: "pointer",
+      }}
+    />
+
+  </div>
+
+  <button
+    onClick={() =>
+      setMeatIndex((prev) =>
+        prev === 0
+          ? meatImages.length - 1
+          : prev - 1
+      )
+    }
+    style={{
+      position: "absolute",
+      left: "10px",
+      width: "38px",
+      height: "38px",
+      borderRadius: "50%",
+      border: "none",
+      background: "rgba(0,0,0,0.55)",
+      color: "white",
+      cursor: "pointer",
+      fontSize: "18px",
+    }}
+  >
+    ←
+  </button>
+
+  <button
+    onClick={() =>
+      setMeatIndex((prev) =>
+        (prev + 1) % meatImages.length
+      )
+    }
+    style={{
+      position: "absolute",
+      right: "10px",
+      width: "38px",
+      height: "38px",
+      borderRadius: "50%",
+      border: "none",
+      background: "rgba(0,0,0,0.55)",
+      color: "white",
+      cursor: "pointer",
+      fontSize: "18px",
+    }}
+  >
+    →
+  </button>
+
+</div>
+
+</div>
+
+</Card>
+    {fullscreen && (
+  <FullscreenGallery
+    images={fullscreen.images}
+    currentIndex={fullscreen.index}
+    onClose={() => setFullscreen(null)}
+  />
+)}
+
+  </div>
+);
+}
+
+// -------------------- Meat Tracer App --------------------
+
+function MeatTracerFeaturedProject() {
+  return (
+    <ShowcaseSection>
+
+      <ShowcaseGrid>
+
+        <ShowcaseContent>
+
+          <ShowcaseBadge>
+            LIVESTOCK TRACEABILITY SYSTEM
+          </ShowcaseBadge>
+
+          <ShowcaseTitle>
+            Meat Tracer Application
+          </ShowcaseTitle>
+
+          <ShowcaseDesc>
+            Cross-platform livestock and meat traceability application
+            built for slaughterhouse operations, shipment tracking,
+            operational monitoring, and owner workflows. Designed with
+            scalable Flutter architecture and real-time synchronization.
+          </ShowcaseDesc>
+
+          <StackWrap>
+            <StackItem>Flutter</StackItem>
+            <StackItem>Firebase</StackItem>
+            <StackItem>Riverpod</StackItem>
+            <StackItem>Responsive UI</StackItem>
+            <StackItem>Real-time Tracking</StackItem>
+            <StackItem>Offline Sync</StackItem>
+          </StackWrap>
+
+          <MetricsRow>
+
+            <MetricCard>
+              <MetricValue>Cross Platform</MetricValue>
+              <MetricLabel>Android + iOS</MetricLabel>
+            </MetricCard>
+
+            <MetricCard>
+              <MetricValue>Live Data</MetricValue>
+              <MetricLabel>Tracking System</MetricLabel>
+            </MetricCard>
+
+            <MetricCard>
+              <MetricValue>Enterprise</MetricValue>
+              <MetricLabel>Operations</MetricLabel>
+            </MetricCard>
+
+          </MetricsRow>
+
+          <ShowcaseButtons>
+
+            <ShowcaseBtn primary>
+              View Screens
+            </ShowcaseBtn>
+
+            <ShowcaseBtn>
+              Flutter App
+            </ShowcaseBtn>
+
+          </ShowcaseButtons>
+
+        </ShowcaseContent>
+
+        <ShowcaseImageWrap>
+          <ShowcaseImage
+            src="/images/mobile.PNG"
+            alt="Meat Tracer App"
+          />
+        </ShowcaseImageWrap>
+
+      </ShowcaseGrid>
+
+    </ShowcaseSection>
+  );
+}
+
+
 const ProjectGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -332,108 +1295,181 @@ const projectData = [
 ];
 
 // -------------------- Components --------------------
-
 function AboutSection() {
+
   return (
-      <Card id="about">
-        <h2 style={{ marginBottom: 16 }}>About Me</h2>
-        <SubText style={{ lineHeight: "1.8", fontSize: "15px" }}>
-          I’m a <strong>Front-End & Mobile Developer</strong> specializing in{" "}
-          <strong>React.js</strong>, <strong>Flutter</strong>, and{" "}
-          <strong>WordPress</strong>. I build fast, elegant, and accessible user
-          interfaces that deliver seamless user experiences.
-          <br />
-          <br />
-          With a deep understanding of both{" "}
-          <strong>design principles</strong> and{" "}
-          <strong>modern web technologies</strong>, I focus on crafting visually
-          appealing, high-performance applications that scale efficiently.
-          <br />
-          <br />
-          I’m passionate about <strong>building clean, reusable code</strong>,
-          optimizing performance, and bringing creative ideas to life through
-          innovative solutions. Whether it’s developing a mobile app, a business
-          website, or a full-stack web platform — I aim to create digital
-          experiences that truly stand out.
-        </SubText>
-      </Card>
+
+    <Card
+      id="about"
+
+      style={{
+        padding: "30px",
+        borderRadius: "24px",
+      }}
+    >
+
+      <h2
+        style={{
+          marginBottom: "18px",
+          fontSize: "2rem",
+        }}
+      >
+        About Me
+      </h2>
+
+      <div
+        style={{
+          maxWidth: "900px",
+        }}
+      >
+
+        <p
+          style={{
+            lineHeight: "1.9",
+            fontSize: "15px",
+            color: "#4b5563",
+            marginBottom: "18px",
+          }}
+        >
+          I’m a
+          <strong>
+            {" "}Front-End & Mobile Developer
+          </strong>
+          {" "}specializing in
+          <strong> React.js</strong>,
+          <strong> Flutter</strong>,
+          and
+          <strong> WordPress</strong>.
+          I build modern, scalable, and
+          performance-focused applications
+          with clean user experiences.
+        </p>
+
+        <p
+          style={{
+            lineHeight: "1.9",
+            fontSize: "15px",
+            color: "#4b5563",
+            marginBottom: "18px",
+          }}
+        >
+          My focus is on creating
+          responsive interfaces, reusable
+          component systems, optimized
+          frontend architecture, and
+          visually refined digital
+          products that scale efficiently
+          across mobile and web platforms.
+        </p>
+
+        <p
+          style={{
+            lineHeight: "1.9",
+            fontSize: "15px",
+            color: "#4b5563",
+            marginBottom: 0,
+          }}
+        >
+          I enjoy transforming complex
+          ideas into polished products
+          through clean code, thoughtful
+          UI design, and modern frontend
+          technologies.
+        </p>
+
+      </div>
+
+    </Card>
+
   );
 }
 
 
 function ProjectCard({ project }) {
-  // Normalize both 'media' and 'images' fields
-  const media = project.media || project.images?.map((img) => ({ type: "image", src: img })) || [];
+
+  const media =
+    project.media ||
+    project.images?.map((img) => ({
+      type: "image",
+      src: img,
+    })) ||
+    [];
 
   const [index, setIndex] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
 
-  // Guard: prevent crash if media array is empty
   if (media.length === 0) return null;
 
-  const next = () => setIndex((i) => (i + 1) % media.length);
-  const prev = () => setIndex((i) => (i === 0 ? media.length - 1 : i - 1));
+  const next = () =>
+    setIndex((i) => (i + 1) % media.length);
 
-  const currentMedia = media[index];
+  const prev = () =>
+    setIndex((i) =>
+      i === 0 ? media.length - 1 : i - 1
+    );
+
+  const current = media[index];
 
   return (
-    <>
-      <Card>
-        <ImageWrapper>
-          {currentMedia.type === "image" ? (
-            <ProjectImage
-              src={currentMedia.src}
-              alt={project.title}
-              onClick={() => setIsOpen(true)}
-              style={{ cursor: "pointer" }}
-            />
-          ) : (
-            <video
-              src={currentMedia.src}
-              controls
-              onClick={() => setIsOpen(true)}
-              style={{
-                width: "100%",
-                height: "230px",
-                borderRadius: "12px",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
-            />
-          )}
+    <Card
+      style={{
+        padding: "18px",
+        borderRadius: "20px",
+      }}
+    >
 
-          {media.length > 1 && (
-            <>
-              <LeftArrow onClick={prev}>
-                <ArrowLeft size={18} />
-              </LeftArrow>
-              <RightArrow onClick={next}>
-                <ArrowRight size={18} />
-              </RightArrow>
-            </>
-          )}
-        </ImageWrapper>
+      <ImageWrapper>
 
-        <ProjectTitle>{project.title}</ProjectTitle>
-        <ProjectDesc>{project.description}</ProjectDesc>
-        <TechList>
-          {project.technologies.map((t) => (
-            <Tech key={t}>{t}</Tech>
-          ))}
-        </TechList>
-      </Card>
+        {current.type === "video" ? (
+          <video
+            src={current.src}
+            controls
+            style={{
+              width: "100%",
+              height: "230px",
+              objectFit: "cover",
+              borderRadius: "12px",
+            }}
+          />
+        ) : (
+          <ProjectImage
+            src={current.src}
+            alt={project.title}
+          />
+        )}
 
-      {isOpen && (
-        <ImageModal
-          media={media}
-          currentIndex={index}
-          onClose={() => setIsOpen(false)}
-        />
-      )}
-    </>
+        {media.length > 1 && (
+          <>
+            <LeftArrow onClick={prev}>
+              <ArrowLeft size={18} />
+            </LeftArrow>
+
+            <RightArrow onClick={next}>
+              <ArrowRight size={18} />
+            </RightArrow>
+          </>
+        )}
+
+      </ImageWrapper>
+
+      <ProjectTitle>
+        {project.title}
+      </ProjectTitle>
+
+      <ProjectDesc>
+        {project.description}
+      </ProjectDesc>
+
+      <TechList>
+        {project.technologies.map((tech) => (
+          <Tech key={tech}>
+            {tech}
+          </Tech>
+        ))}
+      </TechList>
+
+    </Card>
   );
 }
-
 
 // -------------------- Image Modal --------------------
 function ImageModal({ media, currentIndex, onClose }) {
@@ -541,6 +1577,114 @@ function ImageModal({ media, currentIndex, onClose }) {
 }
 
 
+function FullscreenGallery({
+  images,
+  currentIndex,
+  onClose,
+}) {
+
+  const [index, setIndex] = useState(currentIndex);
+
+  const next = () =>
+    setIndex((i) => (i + 1) % images.length);
+
+  const prev = () =>
+    setIndex((i) =>
+      i === 0 ? images.length - 1 : i - 1
+    );
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+
+    window.addEventListener("keydown", handleKey);
+
+    return () =>
+      window.removeEventListener("keydown", handleKey);
+
+  }, []);
+
+  return (
+    <AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+
+        onClick={onClose}
+
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0,0,0,0.9)",
+          zIndex: 9999,
+
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+
+        <motion.img
+          key={index}
+          src={images[index]}
+          alt="preview"
+
+          initial={{
+            opacity: 0,
+            scale: 0.9,
+          }}
+
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+
+          exit={{
+            opacity: 0,
+            scale: 0.9,
+          }}
+
+          style={{
+            maxWidth: "92%",
+            maxHeight: "90%",
+            borderRadius: "20px",
+            objectFit: "contain",
+          }}
+
+          onClick={(e) =>
+            e.stopPropagation()
+          }
+        />
+
+        <GalleryLeft
+          onClick={(e) => {
+            e.stopPropagation();
+            prev();
+          }}
+        >
+          <ArrowLeft size={20} />
+        </GalleryLeft>
+
+        <GalleryRight
+          onClick={(e) => {
+            e.stopPropagation();
+            next();
+          }}
+        >
+          <ArrowRight size={20} />
+        </GalleryRight>
+
+      </motion.div>
+
+    </AnimatePresence>
+  );
+}
+
 
 function Sidebar() {
   return (
@@ -585,13 +1729,57 @@ export default function App() {
     <>
       <GlobalStyle />
       <Container>
-        <HeaderWrap>
-          <Name>Bilal Arshad</Name>
-          <Title>Front-End & Flutter Developer</Title>
-          <SubText>
-            I specialize in <strong>React</strong>, <strong>Flutter</strong>, and <strong>WordPress</strong> development, creating responsive, visually refined, and high-performance digital products that balance design aesthetics with practical functionality.
-          </SubText>
-        </HeaderWrap>
+        <HeaderWrap
+  style={{
+    gap: "14px",
+    marginBottom: "6px",
+  }}
+>
+
+  <Name
+    style={{
+      fontSize: "3.2rem",
+      lineHeight: "1",
+      margin: 0,
+    }}
+  >
+    Bilal Arshad
+  </Name>
+
+  <Title
+    style={{
+      fontSize: "1.5rem",
+      marginTop: "4px",
+      marginBottom: "2px",
+    }}
+  >
+    Front-End & Flutter Developer
+  </Title>
+
+  <SubText
+    style={{
+      maxWidth: "720px",
+
+      fontSize: "16px",
+
+      lineHeight: "1.7",
+
+      marginTop: "8px",
+
+      color: "#6b7280",
+    }}
+  >
+    I specialize in
+    <strong> React</strong>,
+    <strong> Flutter</strong>, and
+    <strong> WordPress </strong>
+    development, building responsive,
+    high-performance digital products
+    with clean UI and scalable frontend
+    architecture.
+  </SubText>
+
+</HeaderWrap>
 
         <Grid>
           <div>
@@ -642,7 +1830,23 @@ export default function App() {
 </MobileProfile>
 
             <AboutSection />
-            <ProjectsSection projects={projects} />
+
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "28px",
+    marginTop: "10px",
+  }}
+>
+  <FeaturedProjectsSection />
+
+  <ProjectsSection
+    projects={projects.filter(
+      (p) => p.id !== 7 && p.id !== 8
+    )}
+  />
+</div>
           </div>
           <Sidebar />
         </Grid>
