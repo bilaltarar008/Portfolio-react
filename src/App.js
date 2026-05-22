@@ -1860,7 +1860,7 @@ export default function App() {
 function ProjectsSection({ projects }) {
   return (
     <section id="projects">
-      <h2 style={{ marginBottom: 12 }}>Projects</h2>
+      {/* <h2 style={{ marginBottom: 12 }}>Projects:</h2> */}
       <ProjectGrid>
         <AnimatePresence>
           {projects.map((p) => (
