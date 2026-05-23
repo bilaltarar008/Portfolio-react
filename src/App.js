@@ -9,10 +9,21 @@ import { MessageCircle, Mail, FileDown, ArrowLeft, ArrowRight } from "lucide-rea
 
 // -------------------- Global Styles --------------------
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
+  html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
   :root {
     --bg: #fafafa;
@@ -23,7 +34,11 @@ const GlobalStyle = createGlobalStyle`
     --radius: 16px;
     font-family: 'Poppins', sans-serif;
     font-size: 17px;
+
   }
+
+  
+
 
   body {
     background: var(--bg);
@@ -46,16 +61,20 @@ const fadeIn = keyframes`
 
 // -------------------- Layout Components --------------------
 const Container = styled.div`
+  width: 100%;
   max-width: 1300px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 24px;
+  overflow-x: hidden;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
+
   animation: ${fadeIn} 1.2s ease-in-out;
 
   @media (max-width: 480px) {
-    padding: 16px;
+    padding: 12px;
   }
 `;
 
@@ -593,7 +612,7 @@ function FeaturedProjectsSection() {
     style={{
       display: "grid",
       gridTemplateColumns:
-        "repeat(auto-fit,minmax(420px,1fr))",
+  "repeat(auto-fit,minmax(min(100%,320px),1fr))",
       gap: "18px",
       alignItems: "start",
       marginBottom: "20px",
@@ -834,13 +853,15 @@ function FeaturedProjectsSection() {
         borderRadius: "24px",
         background: "white",
         padding: "0",
+        width: "100%",
+maxWidth: "100%",
       }}
     >
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 220px",
+          gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
           alignItems: "center",
           minHeight: "100%",
         }}
@@ -988,8 +1009,9 @@ function FeaturedProjectsSection() {
 
   <div
     style={{
-      width: "170px",
-      height: "340px",
+      width: "100%",
+maxWidth: "170px",
+height: "340px",
       background: "black",
       borderRadius: "34px",
       padding: "8px",
@@ -1523,7 +1545,7 @@ function ImageModal({ media, currentIndex, onClose }) {
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{
-              maxWidth: "90%",
+              maxWidth: "100%",
               maxHeight: "85%",
               borderRadius: "12px",
               boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
@@ -1542,7 +1564,7 @@ function ImageModal({ media, currentIndex, onClose }) {
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{
-              maxWidth: "90%",
+              maxWidth: "100%",
               maxHeight: "85%",
               borderRadius: "12px",
               boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
@@ -1741,7 +1763,7 @@ export default function App() {
 
   <Name
     style={{
-      fontSize: "3.2rem",
+      fontSize: "clamp(2rem, 8vw, 3.2rem)",
       lineHeight: "1",
       margin: 0,
     }}
@@ -1761,7 +1783,7 @@ export default function App() {
 
   <SubText
     style={{
-      maxWidth: "720px",
+      maxWidth: "100%",
 
       fontSize: "16px",
 
@@ -1796,7 +1818,7 @@ export default function App() {
     <GhostButton
       href="mailto:Bilal.tarar008@gmail.com"
       style={{
-        width: "90%",
+        width: "100%",
         borderColor: "#f43f5e",
         color: "#f43f5e",
       }}
@@ -1808,7 +1830,7 @@ export default function App() {
       href="/Bilalcv.pdf"
       download="Bilal_Arshad_CV.pdf"
       style={{
-        width: "90%",
+        width: "100%",
         backgroundColor: "#f43f5e",
         color: "white",
         boxShadow: "0 4px 10px rgba(244,63,94,0.3)",
@@ -1822,7 +1844,7 @@ export default function App() {
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        width: "90%",
+        width: "100%",
         borderColor: "#f43f5e",
         color: "#f43f5e",
       }}
