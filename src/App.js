@@ -1272,12 +1272,21 @@ const projectData = [
     images: ["/images/bus.PNG", "/images/bus1.PNG", "/images/bus3.PNG"],
   },
   {
-    id: 2,
-    title: "Business Portfolio (Kidmall.pk)",
-    description: "WordPress business site using MySQL and Elementor.",
-    technologies: ["WordPress", "MySQL", "PHP"],
-    images: ["/images/kid.PNG", "/images/kid1.PNG", "/images/kid2.PNG"],
-  },
+  id: 2,
+  title: "Business Portfolio",
+  description:
+    "WordPress business site using MySQL and Elementor.",
+
+  technologies: ["WordPress", "MySQL", "PHP"],
+
+  liveUrl: "https://kidmall.pk/",
+
+  images: [
+    "/images/kid.PNG",
+    "/images/kid1.PNG",
+    "/images/kid2.PNG",
+  ],
+},
    {
     id: 3,
     title: "EV Charging App UI",
@@ -1311,6 +1320,7 @@ const projectData = [
     title: "United Energy (unitedenergy.pk)",
     description: "United Energy is a renewable energy company specializing in solar solutions for residential, commercial, and industrial needs.",
     technologies: ["React", "CSS", "SupaBase"],
+    liveUrl: "https://unitedenergy.pk/",
     media: [
     { type: "image", src: "/images/Ue1.PNG" },
     { type: "image", src: "/images/Ue2.PNG" },
@@ -1491,6 +1501,33 @@ function ProjectCard({ project }) {
           </Tech>
         ))}
       </TechList>
+
+      {project.liveUrl && (
+  <a
+    href={project.liveUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      textDecoration: "none",
+      display: "inline-block",
+      marginTop: "16px",
+    }}
+  >
+    <div
+      style={{
+        padding: "10px 16px",
+        borderRadius: "10px",
+        background: "#4f46e5",
+        color: "white",
+        fontWeight: "600",
+        fontSize: "14px",
+        width: "fit-content",
+      }}
+    >
+      Visit Website
+    </div>
+  </a>
+)}
 
     </Card>
   );
