@@ -1800,7 +1800,8 @@ export default function App() {
     <strong> WordPress </strong>
     development, building responsive,
     high-performance digital products
-    with clean UI and scalable frontend
+<br className="desktop-break" />
+with clean UI and scalable frontend
     architecture.
   </SubText>
 
