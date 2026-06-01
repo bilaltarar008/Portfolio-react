@@ -1763,8 +1763,8 @@
             <Mail size={16} /> Email
           </GhostButton>
           <GhostButton
-            href="/Bilal Arshadcv.pdf"
-            download="Bilal_Arshad_CV.pdf"
+            href="/bilal-arshad-cv.pdf"
+download="Bilal_Arshad_CV.pdf"
             variant="primary"
           >
             <FileDown size={16} /> Download CV
@@ -1868,12 +1868,12 @@
       </GhostButton>
 
       <GhostButton
-        href="/Bilal Arshadcv.pdf"
-        download="Bilal_Arshad_CV.pdf"
+href="/bilal-arshad-cv.pdf"
+download="Bilal_Arshad_CV.pdf"
         style={{
           width: "100%",
           backgroundColor: "#f43f5e",
-          color: "white",
+          color: "white", 
           boxShadow: "0 4px 10px rgba(244,63,94,0.3)",
         }}
       >
