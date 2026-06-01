@@ -1513,19 +1513,22 @@ function ProjectCard({ project }) {
       marginTop: "16px",
     }}
   >
-    <div
-      style={{
-        padding: "10px 16px",
-        borderRadius: "10px",
-        background: "#4f46e5",
-        color: "white",
-        fontWeight: "600",
-        fontSize: "14px",
-        width: "fit-content",
-      }}
-    >
-      Visit Website
-    </div>
+    <button
+  style={{
+    marginTop: "14px",
+    padding: "10px 16px",
+    borderRadius: "10px",
+    background: "#4f46e5",
+    color: "white",
+    fontWeight: "600",
+    fontSize: "14px",
+    border: "none",
+    cursor: "pointer",
+    width: "100%",
+  }}
+>
+  Visit Website
+</button>
   </a>
 )}
 
@@ -1760,7 +1763,7 @@ function Sidebar() {
           <Mail size={16} /> Email
         </GhostButton>
         <GhostButton
-          href="/Bilalcv.pdf"
+          href="/Bilal Arshadcv.pdf.pdf"
           download="Bilal_Arshad_CV.pdf"
           variant="primary"
         >
@@ -1865,7 +1868,7 @@ with clean UI and scalable frontend
     </GhostButton>
 
     <GhostButton
-      href="/Bilalcv.pdf"
+      href="/Bilal Arshadcv.pdf"
       download="Bilal_Arshad_CV.pdf"
       style={{
         width: "100%",
